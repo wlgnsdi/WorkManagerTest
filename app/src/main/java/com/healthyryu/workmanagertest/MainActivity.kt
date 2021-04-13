@@ -27,6 +27,8 @@ class MainActivity : AppCompatActivity() {
 
                 worker.getWorkInfoByIdLiveData(request.id).observe(this@MainActivity, Observer {
                     println(">> WorkInfo : ${it.state}")
+                    // 돌아오는 값 -> WorkInfo : SUCCEEDED
+
                     when (it.state) {
                         WorkInfo.State.RUNNING -> {
                             progressBar.visibility = View.VISIBLE
@@ -44,9 +46,11 @@ class MainActivity : AppCompatActivity() {
                             progressBar.visibility = View.GONE
                         }
                         else -> {
-
                         }
                     }
+
+                    println(">> ${it.outputData}")
+                    // 결과값 -> Data {output_data2 : 123, output_data : 가나다, }
                 })
             }
         }

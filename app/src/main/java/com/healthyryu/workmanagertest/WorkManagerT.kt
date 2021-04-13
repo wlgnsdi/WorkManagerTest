@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.work.Data
 import androidx.work.Worker
 import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 
 class WorkManagerT(context: Context, workerParams: WorkerParameters) :
     Worker(context, workerParams) {
@@ -16,9 +17,7 @@ class WorkManagerT(context: Context, workerParams: WorkerParameters) :
             Thread.sleep(100)
         }
 
-        val outputData = Data.Builder()
-            .putString(OUTPUT, "This is the output data")
-            .build()
+        val outputData = workDataOf(OUTPUT to "가나다", OUTPUT2 to 123)
 
         return Result.success(outputData)
     }
@@ -26,5 +25,6 @@ class WorkManagerT(context: Context, workerParams: WorkerParameters) :
     companion object {
         const val INPUT = "input_data"
         const val OUTPUT = "output_data"
+        const val OUTPUT2 = "output_data2"
     }
 }
